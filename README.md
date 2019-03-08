@@ -15,7 +15,7 @@ The application relies on being able to make calls to the Stanford OpenNLP Serve
 You can start that server locally by downloading it and running
 
 ```
-java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 15000`
+java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 15000
 ```
 
 from the directory you placed it in.
