@@ -3,13 +3,17 @@
             [ring.util.http-response :refer :all]
             [schema.core :as s]
             [ring.middleware.cors :refer [wrap-cors]]
-            [interactive-nlp-api.openie-facade :as openie-facade]))
+            [interactive-nlp-api.openie-facade :as openie-facade]
+            [interactive-nlp-api.next-question-manager :as next-question-manager]))
 
 (s/defschema UserInput 
   {:text s/Str})
 
 (s/defschema Relation
   {:subject s/Str :relation s/Str :object s/Str})
+
+(s/defschema NextQuestion
+  {:question-text s/Str})
 
 (s/defschema Relations
   [Relation])
@@ -39,6 +43,14 @@
             :body [userInput UserInput]
             :summary "extract relations from text"
             (ok (map #(s/validate Relation %) 
-                  (openie-facade/get-relations (:text userInput))))))))
+                  (openie-facade/get-relations (:text userInput)))))
+          
+          (POST "/get-next-question" []
+            :return NextQuestion
+            :body [userInput UserInput]
+            :summary "get next question based on text"
+            (ok (s/validate NextQuestion 
+              (next-question-manager/get-next-question 
+                (openie-facade/get-relations (:text userInput)))))))))
 
 
