@@ -24,7 +24,10 @@
                              {:subject "I" :relation "want" :object "wings"}
                              {:subject "I" :relation "love" :object "chicken"}
                              {:subject "I" :relation "like" :object "chicken"}
-                             {:subject "I" :relation "want" :object "chicken"}}
+                             {:subject "I" :relation "want" :object "chicken"}
+                             {:subject "I" :relation "love" :object "chicken wings"}
+                             {:subject "I" :relation "like" :object "chicken wings"}
+                             {:subject "I" :relation "want" :object "chicken wings"}}
                   :mutual-information 0.65
                   :question-text "Do you like chicken wings?"})
 
