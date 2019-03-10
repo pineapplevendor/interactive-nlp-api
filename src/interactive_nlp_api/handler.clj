@@ -53,4 +53,3 @@
                        (next-question-manager/get-next-question
                         (openie-facade/get-relations (:text userInput)))))))))
 
-
