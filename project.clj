@@ -7,4 +7,5 @@
    :ring {:handler interactive-nlp-api.handler/app}
    :uberjar-name "server.jar"
    :profiles {:dev {:dependencies [[javax.servlet/javax.servlet-api "3.1.0"]]
-                   :plugins [[lein-ring "0.12.0"]]}})
+                   :plugins [[lein-ring "0.12.0"]
+                            [lein-cljfmt "0.6.4"]]}})
