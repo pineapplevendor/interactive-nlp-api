@@ -13,8 +13,12 @@
    :relation s/Str
    :object s/Str})
 
-(s/defschema Relations
-  [[Relation]])
+(s/defschema SentenceRelations
+  {:sentence s/Str
+   :relations [Relation]})
+
+(s/defschema SentenceRelations
+  [SentenceRelations])
 
 (def pipeline (openie/initialize-openie-pipeline))
 
@@ -33,7 +37,8 @@
 
      (POST "/get-relations" []
        :summary "get subject-relation-object triples from text"
-       :return Relations
+       :return SentenceRelations
        :body [user-input UserInput]
-       (ok (s/validate Relations (openie/get-relations pipeline (:text user-input))))))))
+       (ok (s/validate SentenceRelations
+                       (openie/get-relations pipeline (:text user-input))))))))
 

@@ -5,7 +5,7 @@
                   [ring-cors "0.1.13"]
                   [org.clojure/data.json "0.2.6"]
                   [com.taoensso/faraday "1.9.0"]
-                  [clojure-stanford-openie "0.1.0"] 
+                  [clojure-stanford-openie "1.0.0"] 
                   [metosin/compojure-api "1.1.12"]]
    :managed-dependencies [[org.flatland/ordered "1.5.7"]]
    :ring {:handler interactive-nlp-api.handler/app}
