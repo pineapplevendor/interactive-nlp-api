@@ -1,6 +1,7 @@
  (defproject interactive-nlp-api "0.1.0"
    :description "Get subject-relation-object triples of text"
    :dependencies [[org.clojure/clojure "1.10.0"]
+                  [metosin/spec-tools "0.10.0"]
                   [clj-http "3.9.1"]
                   [ring-cors "0.1.13"]
                   [org.clojure/data.json "0.2.6"]
