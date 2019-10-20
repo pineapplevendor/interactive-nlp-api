@@ -15,6 +15,6 @@ lein do clean, ring uberjar
 java -jar target/server.jar
 ```
 
-### Packaging as war
+### Packaging as jar
 
-`lein ring uberwar`
+`lein ring uberjar`
