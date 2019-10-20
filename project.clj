@@ -17,6 +17,7 @@
                           [org.apache.httpcomponents/httpcore "4.4.11"]
                           [org.apache.httpcomponents/httpclient "4.5.9"]
                           [com.amazonaws/aws-java-sdk-dynamodb "1.11.659"]]
+   :min-lein-version "2.9.1"
    :ring {:handler interactive-nlp-api.handler/app}
    :uberjar-name "interactive-nlp-api-standalone.jar"
    :profiles {:uberjar {:dependencies [[javax.servlet/javax.servlet-api "3.1.0"]]}
