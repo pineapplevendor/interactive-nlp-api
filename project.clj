@@ -11,8 +11,9 @@
                   [metosin/compojure-api "1.1.12"]]
    :managed-dependencies [[org.flatland/ordered "1.5.7"]]
    :ring {:handler interactive-nlp-api.handler/app}
-   :uberjar-name "server.jar"
-   :profiles {:dev {:dependencies [[javax.servlet/javax.servlet-api "3.1.0"]]
+   :uberjar-name "interactive-nlp-api-standalone.jar"
+   :profiles {:uberjar {:dependencies [[javax.servlet/javax.servlet-api "3.1.0"]]}
+              :dev {:dependencies [[javax.servlet/javax.servlet-api "3.1.0"]]
                     :plugins [[lein-ring "0.12.5"]
                               [cider/cider-nrepl "0.21.1"]
                               [lein-exec "0.3.7"]
