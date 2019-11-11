@@ -15,11 +15,12 @@
                                    :relations (s/coll-of ::relation)))
 (s/def ::sentences-to-relations (s/coll-of ::sentence-relations))
 
+(s/def ::experiment-id spec/string?)
 (s/def ::benchmark-entry-id spec/string?)
 (s/def ::benchmark-entry (s/and :sentence spec/string?
                                 :sentence-id spec/string?
-                                :label spec/string?
                                 :next-sentence-id spec/string?))
+(s/def ::re-written-sentence spec/string?)
 
 (def app
   (api
@@ -38,10 +39,22 @@
        :return ::sentences-to-relations
        :body [user-input ::user-input]
        (ok (relations-manager/get-relations (:text user-input))))
-
-    (GET "/get-original-sentence/:id" []
-       :path-params [id :- ::benchmark-entry-id]
+     
+     (GET "/get-original-sentence/:benchmark-entry-id" []
+       :path-params [benchmark-entry-id :- ::benchmark-entry-id]
        :summary "Retrieve the benchmark-entry identified by the given benchmark-entry-id"
        :return ::benchmark-entry
-       (ok (benchmark-manager/get-benchmark-entry id))))))
+       (ok (benchmark-manager/get-benchmark-entry benchmark-entry-id)))
+
+     (GET "/get-next-sentence-in-experiment/:experiment-id" []
+       :path-params [experiment-id :- ::experiment-id]
+       :summary "Get the next benchmark entry in an experiment to re-write"
+       :return ::benchmark-entry-id
+       (ok (benchmark-manager/get-next-sentence-in-experiment experiment-id)))
+
+     (POST "/submit-sentence/:experiment-id/:benchmark-entry-id" []
+       :path-params [experiment-id :- ::experiment-id]
+       :summary "Submit a re-written sentence for a benchmark entry"
+       :body [re-written-benchmark-entry :- ::benchmark-entry]
+       (ok (benchmark-manager/submit-sentence experiment-id re-written-benchmark-entry))))))
 
