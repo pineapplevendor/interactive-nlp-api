@@ -6,13 +6,11 @@ See how a computer extracts information from what you wrote.
 
 `lein ring server`
 
-You can visit the swagger endpoint at http://localhost:3000/index.html
-
 ### Packaging and running as standalone jar
 
 ```
 lein do clean, ring uberjar
-java -jar target/server.jar
+java -Xmx2500m -jar target/server.jar
 ```
 
 ### Packaging as jar
