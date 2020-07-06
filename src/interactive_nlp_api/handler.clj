@@ -20,6 +20,11 @@
                                 :sentence-id spec/string?
                                 :next-sentence-id spec/string?))
 
+(s/def ::is-rewrite-preferred? spec/boolean?)
+(s/def ::relations-to-evaluate (s/and :original-sentence spec/string?
+                                      :original-relations (s/coll-of ::relation)
+                                      :rewritten-relations (s/coll-of ::relation)))
+
 (def app
   (api
    {:coercion :spec}
@@ -32,6 +37,19 @@
                               :access-control-allow-headers ["Origin" "X-Requested-With"
                                                              "Content-Type" "Accept"]
                               :access-control-allow-methods [:options :post :get])]
+
+     (GET "/get-next-evaluation-in-experiment/:experiment-id" []
+          :summary "get subject-relation-object triples for original and re-written sentences"
+          :path-params [experiment-id :- ::experiment-id]
+          :return ::relations-to-evaluate
+          (ok (benchmark-manager/get-next-relations-to-evaluate experiment-id)))
+
+     (POST "/submit-evaluation/:experiment-id" []
+          :summary "submit an evaluation of whether the re-write is preferred or not"
+          :path-params [experiment-id :- ::experiment-id]
+          :body [is-rewrite-preferred :- ::is-rewrite-preferred?]
+          (ok (benchmark-manager/submit-evaluation experiment-id is-rewrite-preferred)))
+
      (POST "/get-relations" []
        :summary "get subject-relation-object triples from text"
        :return ::sentences-to-relations
